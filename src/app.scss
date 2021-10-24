@@ -22,6 +22,12 @@
 
   &_disabled {
     color: gray;
+
+    &:hover {
+      transform: none !important;
+      cursor: default !important;
+      color: gray !important;
+    }
   }
 
   &:hover {

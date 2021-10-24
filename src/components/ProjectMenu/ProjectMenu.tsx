@@ -8,6 +8,7 @@ import {getProjects} from '../../store/projects/projectsActions'
 import {IProject} from '../../models/IProject'
 import {setActiveProject} from '../../store/todoProject/todoReducer'
 import {useHistory} from 'react-router-dom'
+import SmallLoader from '../UI/SmallLoader/SmallLoader'
 
 interface Props {
     collapsed: boolean,
@@ -15,7 +16,7 @@ interface Props {
 }
 
 export const ProjectMenu: React.FC<Props> = ({collapsed, setCollapsed}: Props) => {
-    const {projectList} = useTypedSelector(state => state.projects)
+    const {projectList, isLoading} = useTypedSelector(state => state.projects)
     const {activeProject} = useTypedSelector(state => state.todo)
     const dispatch = useDispatch()
     const router = useHistory()
@@ -45,6 +46,7 @@ export const ProjectMenu: React.FC<Props> = ({collapsed, setCollapsed}: Props) =
                         </Menu.Item>
                     )
                 }
+                {isLoading && <Menu.Item><SmallLoader/></Menu.Item>}
             </Menu>
         </Layout.Sider>
     )

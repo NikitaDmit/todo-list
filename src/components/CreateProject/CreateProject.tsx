@@ -5,15 +5,12 @@ import {PlusOutlined, CheckOutlined, CloseOutlined} from '@ant-design/icons'
 import {useDispatch} from 'react-redux'
 import {createProject} from '../../store/projects/projectsActions'
 import classNames from 'classnames'
-import {useHistory} from 'react-router-dom'
-import {RouteNames} from '../../router'
 
 interface Props {
 }
 
 export const CreateProject: React.FC<Props> = (props: Props) => {
     const dispatch = useDispatch()
-    const router = useHistory()
     const [formIsShow, showOrHideForm] = useState(false)
     const [name, setName] = useState('')
     const [isValid, setValid] = useState(false)
@@ -30,7 +27,7 @@ export const CreateProject: React.FC<Props> = (props: Props) => {
             dispatch(createProject(name))
             setValid(false)
             setName('')
-            router.push(RouteNames.PROJECTS)
+            showOrHideForm(false)
         }
     }
 

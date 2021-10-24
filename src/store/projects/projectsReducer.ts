@@ -1,5 +1,7 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit"
-import {IProject} from "../../models/IProject"
+import {createSlice, PayloadAction} from '@reduxjs/toolkit'
+import {IProject} from '../../models/IProject'
+import {defaultFulfilled, defaultPending, defaultRejected} from '../../common/utils'
+import {createProject, getProjects} from './projectsActions'
 
 export interface interfaceState {
     projectList: IProject[];
@@ -31,7 +33,15 @@ const projectSlice = createSlice({
             state.projectList[index] = action.payload
         },
         resetProjects: () => initialState
-    }
+    },
+    extraReducers: (builder => {
+        builder.addCase(createProject.pending, (state) => defaultPending(state))
+        builder.addCase(createProject.fulfilled, (state) => defaultFulfilled(state))
+        builder.addCase(createProject.rejected, (state, action: any) => defaultRejected(state, action))
+        builder.addCase(getProjects.pending, (state) => defaultPending(state))
+        builder.addCase(getProjects.fulfilled, (state) => defaultFulfilled(state))
+        builder.addCase(getProjects.rejected, (state, action: any) => defaultRejected(state, action))
+    })
 })
 
 export const {setProjects, addProject, resetProjects, removeProject, updateProjectsList} = projectSlice.actions
