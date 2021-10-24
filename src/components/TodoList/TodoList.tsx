@@ -1,12 +1,13 @@
 import * as React from 'react'
 import {useDispatch, useSelector} from "react-redux";
-import {List, Checkbox, Menu, Dropdown} from 'antd';
+import {List, Checkbox, Menu, Dropdown, Button} from 'antd'
 import {EditOutlined, EllipsisOutlined, CloseOutlined} from '@ant-design/icons';
 import {ITodo} from "../../models/ITodo";
 import {setEditableTodo} from '../../store/todoProject/todoReducer';
 import {deleteTodoAction, updateTodo} from '../../store/todoProject/todoActions\'';
 import {TodoForm} from '../TodoForm/TodoForm';
 import {useTypedSelector} from "../../common/hooks";
+import {FormattedMessage} from 'react-intl'
 
 interface Props {
 }
@@ -28,10 +29,10 @@ export const TodoList: React.FC = (props: Props) => {
     const renderMenu = (todo: ITodo) =>
         <Menu>
             <Menu.Item key="1" onClick={() => dispatch(setEditableTodo(todo))}>
-                <EditOutlined className={'icon'}/> Редактировать
+                <EditOutlined className={'icon'}/>  <FormattedMessage id='button.edit'/>
             </Menu.Item>
             <Menu.Item key="2" onClick={() => dispatch(deleteTodoAction(todo.id))}>
-                <CloseOutlined className={'icon'}/> Удалить
+                <CloseOutlined className={'icon'}/>  <FormattedMessage id='button.delete'/>
             </Menu.Item>
         </Menu>
 

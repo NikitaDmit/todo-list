@@ -1,8 +1,9 @@
 import * as React from 'react'
 import {useEffect, useState} from 'react'
-import {Form, Card, Checkbox} from 'antd'
+import {Form, Card, Checkbox, Button} from 'antd'
 import {CloseOutlined, CheckOutlined} from '@ant-design/icons'
-import {useTypedSelector} from "../../common/hooks"
+import {useTypedSelector} from '../../common/hooks'
+import {FormattedMessage, useIntl} from 'react-intl'
 
 interface Props {
     onApply: (title: string, text: string, completed: boolean) => void,
@@ -14,6 +15,7 @@ export const TodoForm: React.FC<Props> = (props: Props) => {
     const [title, setTitle] = useState('')
     const [text, setText] = useState('')
     const [completed, setCompleted] = useState(false)
+    const intl = useIntl()
 
     useEffect(() => {
         resetInputs()
@@ -51,19 +53,19 @@ export const TodoForm: React.FC<Props> = (props: Props) => {
                 <Form>
                     <Form.Item
                         name="title"
-                        rules={[{required: true, message: 'Введите заголовок задачи!'}]}
+                        rules={[{required: true, message: intl.formatMessage({id: 'todoForm.inputTitleReq'})}]}
                     >
                         <div className="ant-form-item-control-input-content">
                             <input type={'text'} className="ant-input"
-                                   placeholder={'Заголовок задачи'} value={title}
+                                   placeholder={intl.formatMessage({id: 'todoForm.inputTitle'})} value={title}
                                    onChange={e => setTitle(e.target.value)}/>
                         </div>
                     </Form.Item>
                     <Form.Item name="text">
                         <div className="ant-form-item-control-input-content">
                             <textarea className="ant-input" cols={3}
-                                      placeholder={'Описание задачи'} value={text}
-                                      onChange={e => setText(e.target.value)}/>
+                                      placeholder={intl.formatMessage({id: 'todoForm.descriptionTask'})}
+                                      value={text} onChange={e => setText(e.target.value)}/>
                         </div>
                     </Form.Item>
                     {
@@ -72,7 +74,7 @@ export const TodoForm: React.FC<Props> = (props: Props) => {
                             checked={completed}
                             onChange={(e) => setCompleted(e.target.checked)}
                         >
-                            Выполнено
+                            <FormattedMessage id='todoForm.done'/>
                         </Checkbox>
                     }
                 </Form>

@@ -5,12 +5,14 @@ import {PlusOutlined, CheckOutlined, CloseOutlined} from '@ant-design/icons'
 import {useDispatch} from 'react-redux'
 import {createProject} from '../../store/projects/projectsActions'
 import classNames from 'classnames'
+import {FormattedMessage, useIntl} from 'react-intl'
 
 interface Props {
 }
 
 export const CreateProject: React.FC<Props> = (props: Props) => {
     const dispatch = useDispatch()
+    const intl = useIntl()
     const [formIsShow, showOrHideForm] = useState(false)
     const [name, setName] = useState('')
     const [isValid, setValid] = useState(false)
@@ -43,17 +45,20 @@ export const CreateProject: React.FC<Props> = (props: Props) => {
 
                             <Form.Item
                                 name="title"
-                                rules={[{required: true, message: 'Введите название задачи!'}]}
+                                rules={[{
+                                    required: true,
+                                    message: intl.formatMessage({id: 'project.projectNameReq'})
+                                }]}
                             >
-                                <Input placeholder={'Название проекта'} value={name}
+                                <Input placeholder={intl.formatMessage({id: 'createProject.projectName'})}
+                                       value={name}
                                        onChange={onChange}/>
                             </Form.Item>
-
                         </Card>
                     </Form>
                     :
                     <Button type="dashed" block icon={<PlusOutlined/>} onClick={() => showOrHideForm(true)}>
-                        Добавить проект
+                        <FormattedMessage id='createProject.create'/>
                     </Button>
             }
         </React.Fragment>

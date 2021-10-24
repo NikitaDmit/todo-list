@@ -1,0 +1,39 @@
+.header {
+
+  &__menu {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__logo {
+    float: left;
+    height: 32px;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  .lang-switcher {
+    &:hover {
+      background-color: inherit !important;
+      color: inherit !important;
+      cursor: default;
+    }
+
+    &__menu {
+      display: flex;
+    }
+
+    &__item {
+      cursor: pointer;
+      color: #acacac;
+      margin-right: 10px;
+
+      &_active {
+        color: white;
+        font-weight: bold;
+      }
+    }
+  }
+
+}

@@ -2,10 +2,11 @@ import * as React from 'react'
 import {Form, Input, Button, Layout, Typography} from 'antd'
 import {useTypedSelector} from '../../common/hooks'
 import {useState} from 'react'
-import {useDispatch} from "react-redux"
+import {useDispatch} from 'react-redux'
 import {signUp} from '../../store/auth/authActions'
-import {useHistory} from "react-router-dom"
+import {useHistory} from 'react-router-dom'
 import {LockOutlined, UserOutlined} from '@ant-design/icons'
+import {FormattedMessage, useIntl} from 'react-intl'
 
 const {Title} = Typography
 
@@ -21,6 +22,7 @@ export const SignUp: React.FC<Props> = (props: Props) => {
     const [isValid, setValid] = useState(true)
     const router = useHistory()
     const isInit = isValid && !email && !password && !password2
+    const intl = useIntl()
 
     const onFinish = () => dispatch(signUp({email: email, password}))
 
@@ -34,68 +36,68 @@ export const SignUp: React.FC<Props> = (props: Props) => {
             >
                 <Title level={4}>Регистрация</Title>
                 <Form.Item
-                    label="Почта"
+                    label={intl.formatMessage({id: 'input.email'})}
                     name="email"
-                    rules={[{required: true, message: 'Укажите почту!'}, {
+                    rules={[{required: true, message: 'input.emailReq'}, {
                         type: 'email',
-                        message: 'Некорректная почта!'
+                        message: intl.formatMessage({id: 'input.emailError'})
                     }]}
                 >
                     <Input
-                        prefix={<UserOutlined/>} placeholder="Почта"
+                        prefix={<UserOutlined/>} placeholder={intl.formatMessage({id: 'input.email'})}
                         value={email} onChange={e => setEmail(e.target.value)}
                     />
                 </Form.Item>
 
                 <Form.Item
-                    label="Пароль"
+                    label={intl.formatMessage({id: 'input.password'})}
                     name="password"
                     rules={[
-                        {required: true, message: 'Введите пароль!'},
+                        {required: true, message: intl.formatMessage({id: 'input.passwordReq'})},
                         () => ({
                             validator(_, value) {
                                 if (value.length > 6) return Promise.resolve()
                                 setValid(false)
-                                return Promise.reject(new Error('Пароль короче 6 символов!'));
-                            },
+                                return Promise.reject(new Error(intl.formatMessage({id: 'input.passwordError'})))
+                            }
                         })
                     ]}
                 >
                     <Input.Password
                         prefix={<LockOutlined/>}
                         type="password"
-                        placeholder="Пароль"
+                        placeholder={intl.formatMessage({id: 'input.password'})}
                         value={password}
                         onChange={e => setPassword(e.target.value)}/>
                 </Form.Item>
 
                 <Form.Item
-                    label="Поврторите пароль"
+                    label={intl.formatMessage({id: 'input.dupPassword'})}
                     name="password2"
-                    rules={[{required: true, message: 'Пароли не совпадают!'}]}
+                    rules={[{required: true, message: intl.formatMessage({id: 'input.dupPasswordError'})}]}
                     validateStatus={isValid ? '' : 'error'}
-                    help={isValid ? ' ' : 'Пароли не совпадают!'}
+                    help={isValid ? ' ' : intl.formatMessage({id: 'input.dupPasswordError'})}
                 >
                     <Input.Password
                         prefix={<LockOutlined/>}
                         type="password2"
-                        placeholder="Повторите пароль"
+                        placeholder={intl.formatMessage({id: 'input.dupPassword'})}
                         value={password2}
                         onChange={e => setPassword2(e.target.value)}/>
                 </Form.Item>
 
                 {error &&
                 <div role="alert" className="ant-form-item-explain-error error">
-                    {error}
+                    <FormattedMessage id={error}/>
                 </div>}
 
                 <Form.Item>
                     <Button type="primary" htmlType="submit" loading={isLoading} disabled={!isValid || isInit}>
-                        Зарегистрироваться
+                        <FormattedMessage id={'button.signUp'}/>
                     </Button>
                     <Button htmlType="button"
                             onClick={() => router.goBack()}>
-                        Назад
+                        <FormattedMessage id={'button.back'}/>
                     </Button>
                 </Form.Item>
             </Form>

@@ -9,6 +9,7 @@ import './Project.scss'
 import {useDispatch} from "react-redux";
 import {deleteProject} from "../../store/projects/projectsActions"
 import {createTodo, editProjectAction} from '../../store/todoProject/todoActions\''
+import {FormattedMessage, useIntl} from 'react-intl'
 
 const {Title} = Typography
 
@@ -21,6 +22,7 @@ export const Project: React.FC<Props> = (props: Props) => {
     const {editableTodo, activeProject} = useTypedSelector(state => state.todo)
     const [name, setName] = useState('')
     const dispatch = useDispatch()
+    const intl = useIntl()
 
     useEffect(() => {
         const projectName = activeProject?.projectName || ''
@@ -47,10 +49,10 @@ export const Project: React.FC<Props> = (props: Props) => {
     const renderMenu = () =>
         <Menu>
             <Menu.Item key="1" onClick={() => setEditForm(true)}>
-                <EditOutlined className={'icon'}/> Редактировать
+                <EditOutlined className={'icon'}/> <FormattedMessage id='button.edit'/>
             </Menu.Item>
             <Menu.Item key="2" onClick={() => dispatch(deleteProject(activeProject?.id || ''))}>
-                <CloseOutlined className={'icon'}/> Удалить
+                <CloseOutlined className={'icon'}/> <FormattedMessage id='button.delete'/>
             </Menu.Item>
         </Menu>
 
@@ -61,7 +63,7 @@ export const Project: React.FC<Props> = (props: Props) => {
                     ? <Form>
                         <Form.Item
                             className={'project__form'}
-                            rules={[{required: true, message: 'Please input your username!'}]}
+                            rules={[{required: true, message: intl.formatMessage({id: 'project.projectNameReq'})}]}
                         >
                             <Input value={name} onChange={e => setName(e.target.value)}/>
                             <div className={'project__form-buttons'}>
@@ -81,7 +83,7 @@ export const Project: React.FC<Props> = (props: Props) => {
             {
                 !formIsShow && !editableTodo &&
                 <Button type="dashed" block icon={<PlusOutlined/>} onClick={() => showOrHideForm(true)}>
-                    Добавить задачу
+                    <FormattedMessage id='project.addTask'/>
                 </Button>
             }
             {

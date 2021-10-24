@@ -29,7 +29,7 @@ export const signIn = createAsyncThunk(
             await signInWithEmailAndPassword(authWithFirebase, email, password)
             authChanged(dispatch)
         } catch (error: any) {
-            return rejectWithValue('Не удалось авторизоваться!')
+            return rejectWithValue('errors.signIn')
         }
     }
 )
@@ -41,7 +41,7 @@ export const signUp = createAsyncThunk(
             await createUserWithEmailAndPassword(authWithFirebase, email, password)
             authChanged(dispatch)
         } catch (error: any) {
-            return rejectWithValue('Не удалось зарегистрироваться!')
+            return rejectWithValue('errors.signUp')
         }
     }
 )
@@ -64,7 +64,7 @@ export const resetPassword = createAsyncThunk(
             sendPasswordResetEmail(authWithFirebase, email)
             authChanged(dispatch)
         } catch (error: any) {
-            return rejectWithValue('Не удалось отправить письмо!')
+            return rejectWithValue('errors.recover')
         }
     }
 )
