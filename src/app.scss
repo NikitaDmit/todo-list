@@ -1,0 +1,90 @@
+@import "css/normalize.css";
+@import "css/mixins";
+@import '~antd/dist/antd.css';
+
+.app {
+  min-height: 100vh;
+}
+
+.icon {
+  color: #545454;
+  -moz-transition: all 0.25s ease-out;
+  -o-transition: all 0.25s ease-out;
+  -webkit-transition: all 0.25s ease-out;
+
+  &_danger {
+    color: #910606 !important;
+  }
+
+  &_apply {
+    color: #21c305 !important;
+  }
+
+  &_disabled {
+    color: gray;
+  }
+
+  &:hover {
+    -webkit-transform: scale(1.15);
+    -ms-transform: scale(1.15);
+    transform: scale(1.15);
+    cursor: pointer;
+    color: black;
+  }
+}
+
+.app-logo {
+  height: 32px;
+  margin: 16px;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.login {
+  background: #f0f2f5;
+  display: flex;
+
+  &__form {
+    min-width: 25vw;
+    margin: auto;
+    background-color: white;
+    padding: 30px 20px 10px 20px;
+  }
+
+  &__password {
+    top: -10px;
+    left: -15px;
+    position: relative;
+  }
+}
+
+.error {
+  color: red;
+  position: relative;
+  top: -5px;
+}
+
+.m-auto {
+  margin: auto;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+textarea {
+  resize: none;
+}
+
+
+@media (max-width: 400px) {
+  .ant-card-body {
+    padding: 20px 5px 0 5px;
+  }
+}
+
