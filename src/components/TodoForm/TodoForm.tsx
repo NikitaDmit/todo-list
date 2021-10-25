@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {useEffect, useState} from 'react'
-import {Form, Card, Checkbox, Button} from 'antd'
+import {Form, Card, Checkbox} from 'antd'
 import {CloseOutlined, CheckOutlined} from '@ant-design/icons'
 import {useTypedSelector} from '../../common/hooks'
 import {FormattedMessage, useIntl} from 'react-intl'

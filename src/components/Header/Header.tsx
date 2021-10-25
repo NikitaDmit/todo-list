@@ -42,8 +42,8 @@ export const Header: React.FC<Props> = ({locale, setLocale}: Props) => {
                 <Menu.Item key="2" className={'ml-auto'} onClick={onLogout}>
                     <FormattedMessage id='header.logout'/>
                 </Menu.Item>}
-                <Menu.Item className={'lang-switcher'}>
-                    <div key={3} className={'lang-switcher__menu'}>
+                <Menu.Item key={3} className={'lang-switcher'}>
+                    <div className={'lang-switcher__menu'}>
                         {Object.keys(LOCALES).map(item =>
                             <div
                                 onClick={() => setLocale(item)}

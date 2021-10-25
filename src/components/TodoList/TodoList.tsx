@@ -1,6 +1,6 @@
 import * as React from 'react'
-import {useDispatch, useSelector} from "react-redux";
-import {List, Checkbox, Menu, Dropdown, Button} from 'antd'
+import {useDispatch} from "react-redux";
+import {List, Checkbox, Menu, Dropdown} from 'antd'
 import {EditOutlined, EllipsisOutlined, CloseOutlined} from '@ant-design/icons';
 import {ITodo} from "../../models/ITodo";
 import {setEditableTodo} from '../../store/todoProject/todoReducer';

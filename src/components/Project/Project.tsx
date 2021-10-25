@@ -83,7 +83,7 @@ export const Project: React.FC<Props> = (props: Props) => {
             {
                 !formIsShow && !editableTodo &&
                 <Button type="dashed" block icon={<PlusOutlined/>} onClick={() => showOrHideForm(true)}>
-                    <FormattedMessage id='project.addTask'/>
+                     <FormattedMessage id='project.addTask'/>
                 </Button>
             }
             {
